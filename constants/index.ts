@@ -36,6 +36,7 @@ export const manufacturers = [
   "Ram",
   "Rolls-Royce",
   "Subaru",
+  "Suzuki",
   "Tesla",
   "Toyota",
   "Volkswagen",
@@ -53,49 +54,108 @@ export const yearsOfProduction = [
   { title: "2021", value: "2021" },
   { title: "2022", value: "2022" },
   { title: "2023", value: "2023" },
+  { title: "2024", value: "2024" },
+  { title: "2025", value: "2025" },
+  { title: "2026", value: "2026" },
 ];
 
 export const fuels = [
-  {
-    title: "Fuel",
-    value: "",
-  },
-  {
-    title: "Gas",
-    value: "Gas",
-  },
-  {
-    title: "Electricity",
-    value: "Electricity",
-  },
+  { title: "Fuel", value: "" },
+  { title: "Petrol", value: "Petrol" },
+  { title: "Diesel", value: "Diesel" },
+  { title: "Hybrid", value: "Hybrid" },
+  { title: "Electric", value: "Electric" },
+];
+
+export const transmissions = [
+  { title: "Transmission", value: "" },
+  { title: "Automatic", value: "Automatic" },
+  { title: "Manual", value: "Manual" },
+];
+
+export const bodyTypes = [
+  { title: "Body Type", value: "" },
+  { title: "Sedan", value: "Sedan" },
+  { title: "SUV", value: "SUV" },
+  { title: "Pickup", value: "Pickup" },
+  { title: "Van", value: "Van" },
+  { title: "Hatchback", value: "Hatchback" },
+];
+
+export const conditions = [
+  { title: "Excellent", value: "Excellent" },
+  { title: "Good", value: "Good" },
+  { title: "Fair", value: "Fair" },
+  { title: "Poor", value: "Poor" },
+];
+
+export const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Vehicles", href: "/vehicles" },
+  { label: "Sell Your Car", href: "/sell-your-car" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const footerLinks = [
   {
-    title: "About",
+    title: "Quick Links",
     links: [
-      { title: "How it works", url: "/" },
-      { title: "Featured", url: "/" },
-      { title: "Partnership", url: "/" },
-      { title: "Bussiness Relation", url: "/" },
+      { title: "Home", url: "/" },
+      { title: "Vehicles", url: "/vehicles" },
+      { title: "Sell Your Car", url: "/sell-your-car" },
+      { title: "About Us", url: "/about" },
+      { title: "Contact", url: "/contact" },
     ],
   },
   {
-    title: "Company",
+    title: "Vehicles",
     links: [
-      { title: "Events", url: "/" },
-      { title: "Blog", url: "/" },
-      { title: "Podcast", url: "/" },
-      { title: "Invite a friend", url: "/" },
+      { title: "Browse All", url: "/vehicles" },
+      { title: "Featured", url: "/vehicles?featured=true" },
+      { title: "By Make", url: "/vehicles" },
+      { title: "By Branch", url: "/vehicles" },
     ],
   },
   {
-    title: "Socials",
+    title: "Contact",
     links: [
-      { title: "Discord", url: "/" },
-      { title: "Instagram", url: "/" },
-      { title: "Twitter", url: "/" },
-      { title: "Facebook", url: "/" },
+      { title: "+255 22 123 4567", url: "tel:+255221234567" },
+      { title: "info@bingwamagari.co.tz", url: "mailto:info@bingwamagari.co.tz" },
+      { title: "Kariakoo, Dar es Salaam", url: "#" },
+      { title: "WhatsApp Us", url: "https://wa.me/255221234567" },
     ],
+  },
+];
+
+export const popularMakes = ["Toyota", "Nissan", "Honda", "Suzuki", "Mercedes-Benz", "BMW"];
+
+export const dashboardNavItems = [
+  { section: "Overview", items: [{ label: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" }] },
+  {
+    section: "Inventory",
+    items: [
+      { label: "Vehicles", href: "/dashboard/vehicles", icon: "Car" },
+      { label: "Add Vehicle", href: "/dashboard/vehicles/new", icon: "Plus" },
+    ],
+  },
+  {
+    section: "Sales",
+    items: [
+      { label: "Inquiries", href: "/dashboard/inquiries", icon: "MessageSquare" },
+      { label: "Sell Requests", href: "/dashboard/sell-requests", icon: "HandCoins" },
+    ],
+  },
+  {
+    section: "Operations",
+    items: [
+      { label: "Inspections", href: "/dashboard/inspections", icon: "ClipboardCheck" },
+      { label: "Branches", href: "/dashboard/branches", icon: "MapPin" },
+      { label: "Staff", href: "/dashboard/staff", icon: "Users" },
+    ],
+  },
+  {
+    section: "Reports",
+    items: [{ label: "Analytics", href: "/dashboard/reports", icon: "BarChart3" }],
   },
 ];

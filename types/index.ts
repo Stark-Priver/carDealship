@@ -1,5 +1,6 @@
 import { MouseEventHandler } from "react";
 
+// Legacy CarHub types
 export interface CarProps {
   city_mpg: number;
   class: string;
@@ -65,4 +66,96 @@ export interface ShowMoreProps {
 export interface SearchManuFacturerProps {
   manufacturer: string;
   setManuFacturer: (manufacturer: string) => void;
+}
+
+// Bingwa Magari types
+export type VehicleStatus = "AVAILABLE" | "RESERVED" | "SOLD";
+
+export interface VehicleCardProps {
+  id: string;
+  stockNumber: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType: string;
+  transmission: string;
+  status: VehicleStatus;
+  primaryImage: string;
+  branch: string;
+  isFeatured?: boolean;
+}
+
+export interface VehicleDetailProps extends VehicleCardProps {
+  color?: string;
+  engineSize?: string;
+  bodyType?: string;
+  importCountry?: string;
+  previousOwners?: number;
+  accidentHistory?: boolean;
+  serviceHistory?: boolean;
+  description?: string;
+  descriptionSw?: string;
+  images?: string[];
+}
+
+export interface BranchProps {
+  id: string;
+  name: string;
+  city: string;
+  address: string;
+  phone: string;
+}
+
+export interface InquiryProps {
+  id: string;
+  customerName: string;
+  phone: string;
+  vehicleName: string;
+  vehicleId: string;
+  status: "NEW" | "CONTACTED" | "NEGOTIATING" | "CLOSED_WON" | "CLOSED_LOST";
+  date: string;
+  agent: string;
+}
+
+export interface SellRequestProps {
+  id: string;
+  sellerName: string;
+  phone: string;
+  make: string;
+  model: string;
+  year: number;
+  askingPrice: number;
+  status: "PENDING" | "INSPECTION_ASSIGNED" | "INSPECTED" | "APPROVED" | "REJECTED";
+  date: string;
+}
+
+export interface InspectionRating {
+  engine: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  transmission: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  suspension: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  chassis: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  interior: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  exterior: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+  electrical: "EXCELLENT" | "GOOD" | "FAIR" | "POOR";
+}
+
+export interface SellCarFormData {
+  // Step 1
+  fullName: string;
+  phoneNumber: string;
+  email?: string;
+  // Step 2
+  make: string;
+  model: string;
+  year: number;
+  mileage: number;
+  fuelType: string;
+  transmission: string;
+  bodyType: string;
+  color: string;
+  askingPrice: number;
+  condition: "Excellent" | "Good" | "Fair" | "Poor";
+  description: string;
 }

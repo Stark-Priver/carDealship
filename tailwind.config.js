@@ -4,17 +4,47 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   mode: "jit",
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        display: ['"DM Serif Display"', 'serif'],
+        sans: ['"DM Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
+        brand: {
+          primary: '#1E3A5F',
+          navy: '#1E3A5F',
+          accent: '#2563EB',
+          'accent-hover': '#1D4ED8',
+        },
+        surface: {
+          base: '#F9FAFB',
+          card: '#FFFFFF',
+          muted: '#F3F4F6',
+          dark: '#111827',
+        },
+        'text-brand': {
+          primary: '#111827',
+          secondary: '#374151',
+          muted: '#6B7280',
+          inverse: '#FFFFFF',
+        },
+        status: {
+          available: '#059669',
+          reserved: '#D97706',
+          sold: '#DC2626',
+        },
+        whatsapp: {
+          DEFAULT: '#25D366',
+          hover: '#128C7E',
+        },
         "black-100": "#2B2C35",
         "primary-blue": {
-          DEFAULT: "#2B59FF",
+          DEFAULT: "#2563EB",
           100: "#F5F8FF",
         },
         "secondary-orange": "#f79761",
@@ -26,8 +56,8 @@ module.exports = {
       },
       backgroundImage: {
         'pattern': "url('/pattern.png')",
-        'hero-bg': "url('/hero-bg.png')"
-      }
+        'hero-bg': "url('/hero-bg.png')",
+      },
     },
   },
   plugins: [],
