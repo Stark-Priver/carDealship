@@ -152,6 +152,7 @@ export const mockBranches: BranchProps[] = [
     city: "Mwanza",
     address: "Pamba Road, Mwanza",
     phone: "+255 28 123 4567",
+    upcoming: true,
   },
   {
     id: "3",
@@ -159,6 +160,7 @@ export const mockBranches: BranchProps[] = [
     city: "Arusha",
     address: "Sokoine Road, Arusha",
     phone: "+255 27 123 4567",
+    upcoming: true,
   },
   {
     id: "4",
@@ -166,6 +168,7 @@ export const mockBranches: BranchProps[] = [
     city: "Dodoma",
     address: "Nyerere Road, Dodoma",
     phone: "+255 26 123 4567",
+    upcoming: true,
   },
 ];
 

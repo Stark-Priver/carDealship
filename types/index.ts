@@ -106,6 +106,7 @@ export interface BranchProps {
   city: string;
   address: string;
   phone: string;
+  upcoming?: boolean;
 }
 
 export interface InquiryProps {
