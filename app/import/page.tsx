@@ -225,7 +225,7 @@ export default function ImportPage() {
                 Request Import
               </Link>
               <a
-                href="https://wa.me/255221234567?text=Hello%2C%20I%20would%20like%20to%20import%20a%20car"
+                href="https://wa.me/255711398600?text=Hello%2C%20I%20would%20like%20to%20import%20a%20car"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 rounded-full bg-[#25D366] text-white text-base font-semibold hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/30"

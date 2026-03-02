@@ -137,11 +137,11 @@ export default function ContactPage() {
               <h3 className='font-semibold mb-4'>Quick Contact</h3>
               <div className='space-y-4'>
                 <a
-                  href='tel:+255222123456'
+                  href='tel:+255711398600'
                   className='flex items-center gap-3 text-sm text-text-brand-secondary hover:text-brand-accent transition-colors'
                 >
                   <Phone size={18} className='text-brand-accent' />
-                  +255 22 212 3456
+                  +255 711 398 600
                 </a>
                 <a
                   href='mailto:info@bingwamagari.co.tz'
@@ -151,13 +151,22 @@ export default function ContactPage() {
                   info@bingwamagari.co.tz
                 </a>
                 <a
-                  href='https://wa.me/255222123456'
+                  href='https://wa.me/255711398600'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='flex items-center gap-3 text-sm text-text-brand-secondary hover:text-whatsapp-primary transition-colors'
                 >
                   <MessageCircle size={18} className='text-whatsapp-primary' />
                   WhatsApp Us
+                </a>
+                <a
+                  href='https://whatsapp.com/channel/0029VaGSRhdDeOMxgJBw9E3t'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex items-center gap-3 text-sm text-text-brand-secondary hover:text-whatsapp-primary transition-colors'
+                >
+                  <MessageCircle size={18} className='text-whatsapp-primary' />
+                  Join WhatsApp Channel
                 </a>
               </div>
             </div>
@@ -168,9 +177,16 @@ export default function ContactPage() {
               <div className='space-y-4'>
                 {mockBranches.map((branch) => (
                   <div key={branch.id} className='flex items-start gap-3'>
-                    <MapPin size={16} className='text-brand-accent mt-0.5 flex-shrink-0' />
+                    <MapPin size={16} className={`mt-0.5 flex-shrink-0 ${branch.upcoming ? 'text-amber-500' : 'text-brand-accent'}`} />
                     <div>
-                      <p className='text-sm font-medium'>{branch.name}</p>
+                      <p className='text-sm font-medium flex items-center gap-2'>
+                        {branch.name}
+                        {branch.upcoming && (
+                          <span className='text-[10px] font-bold bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full'>
+                            COMING SOON
+                          </span>
+                        )}
+                      </p>
                       <p className='text-xs text-text-brand-muted'>{branch.address}</p>
                       <p className='text-xs text-text-brand-muted'>{branch.phone}</p>
                     </div>

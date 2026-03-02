@@ -15,7 +15,7 @@ const WhatsAppButton = ({ vehicleId, stockNumber, make, model, year }: WhatsAppB
     `Habari! Nina nia na ${year} ${make} ${model} — Stock #${stockNumber}. Tafadhali nipe maelezo zaidi.`
   );
 
-  const whatsappUrl = `https://wa.me/255221234567?text=${message}`;
+  const whatsappUrl = `https://wa.me/255711398600?text=${message}`;
 
   return (
     <a

@@ -122,10 +122,11 @@ export const footerLinks = [
   {
     title: "Contact",
     links: [
-      { title: "+255 22 123 4567", url: "tel:+255221234567" },
+      { title: "+255 711 398 600", url: "tel:+255711398600" },
       { title: "info@bingwamagari.co.tz", url: "mailto:info@bingwamagari.co.tz" },
-      { title: "Kariakoo, Dar es Salaam", url: "#" },
-      { title: "WhatsApp Us", url: "https://wa.me/255221234567" },
+      { title: "Magomeni, Dar es Salaam", url: "#" },
+      { title: "WhatsApp Us", url: "https://wa.me/255711398600" },
+      { title: "WhatsApp Channel", url: "https://whatsapp.com/channel/0029VaGSRhdDeOMxgJBw9E3t" },
     ],
   },
 ];

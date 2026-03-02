@@ -143,8 +143,8 @@ export const mockBranches: BranchProps[] = [
     id: "1",
     name: "Dar es Salaam",
     city: "Dar es Salaam",
-    address: "Kariakoo, Dar es Salaam",
-    phone: "+255 22 123 4567",
+    address: "Magomeni, Dar es Salaam",
+    phone: "+255 711 398 600",
   },
   {
     id: "2",
