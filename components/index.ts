@@ -15,6 +15,8 @@ import WhyBingwa from "./home/WhyBingwa";
 import StatsSection from "./home/StatsSection";
 import SellYourCarBanner from "./home/SellYourCarBanner";
 import BranchesSection from "./home/BranchesSection";
+import KuagizaBanner from "./home/KuagizaBanner";
+import SocialReels from "./home/SocialReels";
 
 // Vehicle components
 import VehicleCard from "./vehicles/VehicleCard";
@@ -40,6 +42,8 @@ export {
   StatsSection,
   SellYourCarBanner,
   BranchesSection,
+  KuagizaBanner,
+  SocialReels,
   // Vehicle components
   VehicleCard,
   VehicleStatusBadge,

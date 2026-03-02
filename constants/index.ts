@@ -92,6 +92,7 @@ export const conditions = [
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Vehicles", href: "/vehicles" },
+  { label: "Import", href: "/import" },
   { label: "Sell Your Car", href: "/sell-your-car" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -103,6 +104,7 @@ export const footerLinks = [
     links: [
       { title: "Home", url: "/" },
       { title: "Vehicles", url: "/vehicles" },
+      { title: "Import a Car", url: "/import" },
       { title: "Sell Your Car", url: "/sell-your-car" },
       { title: "About Us", url: "/about" },
       { title: "Contact", url: "/contact" },

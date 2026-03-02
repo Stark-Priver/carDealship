@@ -22,9 +22,9 @@ module.exports = {
           'accent-hover': '#1D4ED8',
         },
         surface: {
-          base: '#F9FAFB',
-          card: '#FFFFFF',
-          muted: '#F3F4F6',
+          base: '#F5F0EB',
+          card: '#FAF7F4',
+          muted: '#EDE8E3',
           dark: '#111827',
         },
         'text-brand': {
