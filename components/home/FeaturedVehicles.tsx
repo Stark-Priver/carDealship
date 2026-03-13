@@ -1,11 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { mockVehicles } from "@lib/mockData";
+import { getFeaturedVehicles } from "@lib/data";
 import VehicleCard from "../vehicles/VehicleCard";
 
-const FeaturedVehicles = () => {
-  const featured = mockVehicles.filter((v) => v.isFeatured || v.status === "AVAILABLE").slice(0, 6);
+const FeaturedVehicles = async () => {
+  const featured = await getFeaturedVehicles(6);
 
   return (
     <section className='py-16 px-6 sm:px-16 max-w-[1440px] mx-auto'>
@@ -20,9 +18,11 @@ const FeaturedVehicles = () => {
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
-        {featured.map((vehicle) => (
+        {featured.length > 0 ? featured.map((vehicle) => (
           <VehicleCard key={vehicle.id} {...vehicle} />
-        ))}
+        )) : (
+          <p className='text-text-brand-muted'>No featured vehicles yet.</p>
+        )}
       </div>
     </section>
   );
