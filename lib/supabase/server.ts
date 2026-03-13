@@ -17,10 +17,10 @@ export function createClient() {
           return cookieStore.get(name)?.value;
         },
         set(name: string, value: string, options: Record<string, unknown>) {
-          cookieStore.set(name, value, options);
+          cookieStore.set({ name, value, ...(options as object) });
         },
         remove(name: string, options: Record<string, unknown>) {
-          cookieStore.set(name, "", options);
+          cookieStore.set({ name, value: "", ...(options as object) });
         },
       },
     }
