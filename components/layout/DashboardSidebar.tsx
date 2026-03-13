@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  type LucideIcon,
   LayoutDashboard,
   Car,
   MessageSquare,
@@ -17,9 +18,15 @@ import {
   LogOut,
   PackageCheck,
   X,
-import { AppRole } from "@lib/supabase/database.types";
 } from "lucide-react";
-const sidebarSectionsByRole: Record<AppRole, Array<{ section: string; items: Array<{ label: string; href: string; icon: any }> }>> = {
+import { AppRole } from "@lib/supabase/database.types";
+
+type SidebarSection = {
+  section: string;
+  items: Array<{ label: string; href: string; icon: LucideIcon }>;
+};
+
+const sidebarSectionsByRole: Record<AppRole, SidebarSection[]> = {
   ADMIN: [
     {
       section: "Main",
