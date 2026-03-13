@@ -1,6 +1,18 @@
 import { requireAnyRole } from "@lib/auth";
 import { createClient } from "@lib/supabase/server";
 
+type InspectionListItem = {
+  id: string;
+  status: string;
+  rating: number | null;
+  notes: string | null;
+  scheduled_at: string | null;
+  completed_at: string | null;
+  sell_requests: { make: string; model: string; year: number } | null;
+  vehicles: { make: string; model: string; year: number } | null;
+  profiles: { full_name: string | null } | null;
+};
+
 export default async function InspectionsPage() {
   await requireAnyRole(["ADMIN", "STAFF"]);
   const supabase = createClient();
@@ -9,6 +21,8 @@ export default async function InspectionsPage() {
     .from("inspections")
     .select("id, status, rating, notes, scheduled_at, completed_at, sell_requests(make, model, year), vehicles(make, model, year), profiles(full_name)")
     .order("created_at", { ascending: false });
+
+  const inspections = (data ?? []) as InspectionListItem[];
 
   return (
     <div>
@@ -28,7 +42,7 @@ export default async function InspectionsPage() {
             </tr>
           </thead>
           <tbody>
-            {(data ?? []).map((inspection) => {
+            {inspections.map((inspection) => {
               const vehicleName = inspection.vehicles
                 ? `${inspection.vehicles.year} ${inspection.vehicles.make} ${inspection.vehicles.model}`
                 : inspection.sell_requests
