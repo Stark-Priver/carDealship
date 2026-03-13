@@ -1,5 +1,14 @@
 import { createClient } from "@lib/supabase/server";
 
+type BranchItem = {
+  id: string;
+  name: string;
+  city: string;
+  address: string;
+  phone: string;
+  upcoming: boolean;
+};
+
 export async function getFeaturedVehicles(limit = 6) {
   const supabase = createClient();
   const { data } = await supabase
@@ -50,7 +59,7 @@ export async function getVehicles() {
   }));
 }
 
-export async function getVehicleById(id: string) {
+export async function getVehicleById(id: string): Promise<any | null> {
   const supabase = createClient();
   const { data } = await supabase
     .from("vehicles")
@@ -58,7 +67,7 @@ export async function getVehicleById(id: string) {
     .eq("id", id)
     .maybeSingle();
 
-  return data;
+  return data as any;
 }
 
 export async function getVehicleImages(vehicleId: string) {
@@ -72,10 +81,10 @@ export async function getVehicleImages(vehicleId: string) {
   return (data ?? []).map((item) => item.image_url);
 }
 
-export async function getBranches() {
+export async function getBranches(): Promise<BranchItem[]> {
   const supabase = createClient();
   const { data } = await supabase.from("branches").select("*").order("name", { ascending: true });
-  return data ?? [];
+  return (data ?? []) as BranchItem[];
 }
 
 export async function getDashboardStats() {
