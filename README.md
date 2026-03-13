@@ -26,6 +26,7 @@ Copy `.env.example` to `.env.local` and fill values:
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SITE_URL=https://bingwamagari.co.tz
 ```
 
 ## 2. Supabase Database Setup
@@ -33,6 +34,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 1. Create a Supabase project.
 2. Open SQL Editor.
 3. Run the script in `supabase/schema.sql`.
+4. Run `supabase/seed.sql` for starter branches, vehicles, and sample staff role mapping by email.
 4. Confirm buckets exist:
 - `vehicle-images`
 - `sell-request-images`
@@ -44,7 +46,8 @@ npm install
 npm run dev
 ```
 
-Open: `http://localhost:3000`
+Local: `http://localhost:3000`
+Production domain: `https://bingwamagari.co.tz`
 
 ## 4. Authentication and Roles
 
@@ -101,3 +104,36 @@ npm run build
 - Dashboard navigation is role-aware.
 - File uploads are stored in Supabase Storage buckets.
 - All business workflows are backed by Supabase tables (no mock data in core paths).
+- Admin UI now supports:
+	- Branch create/edit from `/dashboard/branches`
+	- Staff role/branch/status management from `/dashboard/staff`
+
+## 8. E2E Tests (Playwright)
+
+Install browser binaries:
+
+```bash
+npx playwright install
+```
+
+Set test users in `.env.local` (these should exist in Supabase Auth):
+
+```env
+E2E_BUYER_EMAIL=buyer@bingwamagari.co.tz
+E2E_BUYER_PASSWORD=yourpassword
+E2E_SELLER_EMAIL=seller@bingwamagari.co.tz
+E2E_SELLER_PASSWORD=yourpassword
+E2E_STAFF_EMAIL=sales@bingwamagari.co.tz
+E2E_STAFF_PASSWORD=yourpassword
+```
+
+Run tests:
+
+```bash
+npm run test:e2e
+```
+
+Covered flows:
+- Buyer order placement
+- Seller sell-request submission
+- Staff processing (inquiries and sell requests)
