@@ -9,8 +9,11 @@ import {
   BranchesSection,
   SocialReels,
 } from "@components";
+import { getFeaturedVehicles } from "@lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const featuredVehicles = await getFeaturedVehicles(6);
+
   return (
     <main className='overflow-hidden'>
       {/* Hero Section - Full viewport */}
@@ -20,7 +23,7 @@ export default function Home() {
       <HomeSearchBar />
 
       {/* Featured Vehicles */}
-      <FeaturedVehicles />
+      <FeaturedVehicles featured={featuredVehicles} />
 
       {/* Kuagiza - Import Banner */}
       <KuagizaBanner />
