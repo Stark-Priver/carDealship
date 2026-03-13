@@ -1,6 +1,24 @@
 import { requireAnyRole } from "@lib/auth";
 import { createClient } from "@lib/supabase/server";
 
+type BranchItem = {
+  id: string;
+  name: string;
+  address: string;
+  phone: string;
+};
+
+type VehicleMetricItem = {
+  branch_id: string;
+  status: "AVAILABLE" | "RESERVED" | "SOLD";
+};
+
+type StaffMetricItem = {
+  id: string;
+  branch_id: string | null;
+  role: "ADMIN" | "STAFF";
+};
+
 export default async function BranchesPage() {
   await requireAnyRole(["ADMIN", "STAFF"]);
   const supabase = createClient();
@@ -9,17 +27,21 @@ export default async function BranchesPage() {
   const { data: vehicles } = await supabase.from("vehicles").select("branch_id, status");
   const { data: staff } = await supabase.from("profiles").select("id, branch_id, role").in("role", ["ADMIN", "STAFF"]);
 
+  const branchList = (branches ?? []) as BranchItem[];
+  const vehicleList = (vehicles ?? []) as VehicleMetricItem[];
+  const staffList = (staff ?? []) as StaffMetricItem[];
+
   return (
     <div>
       <h1 className='text-2xl font-bold text-text-brand-primary mb-6'>Branches</h1>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-        {(branches ?? []).map((branch) => {
-          const branchVehicles = (vehicles ?? []).filter((v) => v.branch_id === branch.id);
+        {branchList.map((branch) => {
+          const branchVehicles = vehicleList.filter((v) => v.branch_id === branch.id);
           const available = branchVehicles.filter((v) => v.status === "AVAILABLE").length;
           const reserved = branchVehicles.filter((v) => v.status === "RESERVED").length;
           const sold = branchVehicles.filter((v) => v.status === "SOLD").length;
-          const branchStaff = (staff ?? []).filter((person) => person.branch_id === branch.id).length;
+          const branchStaff = staffList.filter((person) => person.branch_id === branch.id).length;
 
           return (
             <div key={branch.id} className='dashboard-card'>
