@@ -24,7 +24,7 @@ export async function signIn(formData: FormData) {
     redirect(`/auth/login?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/", "layout");
+  revalidatePath("/");
   redirect(nextPath);
 }
 
@@ -62,6 +62,6 @@ export async function signUp(formData: FormData) {
 export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();
-  revalidatePath("/", "layout");
+  revalidatePath("/");
   redirect("/");
 }
