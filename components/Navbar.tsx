@@ -88,6 +88,13 @@ const NavBar = () => {
 
           {/* CTA */}
           <Link
+            href='/dashboard'
+            className='px-4 py-2 rounded-full border border-[var(--border-default)] text-sm font-semibold text-text-brand-secondary hover:bg-surface-muted transition-colors'
+          >
+            Dashboard
+          </Link>
+
+          <Link
             href='/sell-your-car'
             className='px-5 py-2.5 rounded-full bg-brand-accent text-white text-sm font-semibold hover:bg-brand-accent-hover transition-colors'
           >
@@ -132,13 +139,22 @@ const NavBar = () => {
               >
                 {lang === "EN" ? "SW" : "EN"}
               </button>
-              <Link
-                href='/sell-your-car'
-                onClick={() => setIsMobileOpen(false)}
-                className='px-5 py-2.5 rounded-full bg-brand-accent text-white text-sm font-semibold'
-              >
-                List Your Car
-              </Link>
+              <div className='flex items-center gap-2'>
+                <Link
+                  href='/dashboard'
+                  onClick={() => setIsMobileOpen(false)}
+                  className='px-4 py-2 rounded-full border border-[var(--border-default)] text-sm font-semibold'
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href='/sell-your-car'
+                  onClick={() => setIsMobileOpen(false)}
+                  className='px-5 py-2.5 rounded-full bg-brand-accent text-white text-sm font-semibold'
+                >
+                  List Your Car
+                </Link>
+              </div>
             </div>
           </div>
         </div>
