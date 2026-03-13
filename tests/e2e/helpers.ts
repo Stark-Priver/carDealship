@@ -11,8 +11,8 @@ export const E2E = {
 
 export async function login(page: Page, email: string, password: string, next = "/dashboard") {
   await page.goto(`/auth/login?next=${encodeURIComponent(next)}`);
-  await page.getByLabel("Email").first().fill(email);
-  await page.getByLabel("Password").first().fill(password);
+  await page.locator("input[name='email']").first().fill(email);
+  await page.locator("input[name='password']").first().fill(password);
   await page.getByRole("button", { name: "Sign In" }).click();
   await page.waitForURL(/\/dashboard|\/auth\/login/);
 }
