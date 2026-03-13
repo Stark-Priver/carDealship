@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { getFeaturedVehicles } from "@lib/data";
+import { VehicleCardProps } from "@types";
 import VehicleCard from "../vehicles/VehicleCard";
 
-const FeaturedVehicles = async () => {
-  const featured = await getFeaturedVehicles(6);
+interface FeaturedVehiclesProps {
+  featured: VehicleCardProps[];
+}
+
+const FeaturedVehicles = ({ featured }: FeaturedVehiclesProps) => {
 
   return (
     <section className='py-16 px-6 sm:px-16 max-w-[1440px] mx-auto'>
