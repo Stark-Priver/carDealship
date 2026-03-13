@@ -8,6 +8,17 @@ interface InquiriesPageProps {
 
 const statusOptions = ["NEW", "CONTACTED", "NEGOTIATING", "CLOSED_WON", "CLOSED_LOST"] as const;
 
+type InquiryListItem = {
+  id: string;
+  customer_name: string;
+  phone: string;
+  email: string | null;
+  status: string;
+  message: string | null;
+  created_at: string;
+  vehicles: { make: string; model: string; year: number } | null;
+};
+
 export default async function InquiriesPage({ searchParams }: InquiriesPageProps) {
   await requireAnyRole(["ADMIN", "STAFF"]);
   const supabase = createClient();
@@ -17,7 +28,9 @@ export default async function InquiriesPage({ searchParams }: InquiriesPageProps
     .select("id, customer_name, phone, email, status, message, created_at, vehicles(make, model, year)")
     .order("created_at", { ascending: false });
 
-  const filtered = (data ?? []).filter((inq) => {
+  const list = (data ?? []) as InquiryListItem[];
+
+  const filtered = list.filter((inq) => {
     const q = (searchParams.q || "").toLowerCase();
     const matchesQ =
       !q ||
