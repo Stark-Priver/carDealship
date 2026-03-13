@@ -15,36 +15,82 @@ import {
   ChevronLeft,
   Menu,
   LogOut,
+  PackageCheck,
   X,
+import { AppRole } from "@lib/supabase/database.types";
 } from "lucide-react";
+const sidebarSectionsByRole: Record<AppRole, Array<{ section: string; items: Array<{ label: string; href: string; icon: any }> }>> = {
+  ADMIN: [
+    {
+      section: "Main",
+      items: [
+        { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+        { label: "Vehicles", href: "/dashboard/vehicles", icon: Car },
+        { label: "Inquiries", href: "/dashboard/inquiries", icon: MessageSquare },
+      ],
+    },
+    {
+      section: "Requests",
+      items: [
+        { label: "Sell Requests", href: "/dashboard/sell-requests", icon: HandCoins },
+        { label: "Orders", href: "/dashboard/orders", icon: PackageCheck },
+        { label: "Inspections", href: "/dashboard/inspections", icon: ClipboardCheck },
+      ],
+    },
+    {
+      section: "Management",
+      items: [
+        { label: "Branches", href: "/dashboard/branches", icon: Building2 },
+        { label: "Staff", href: "/dashboard/staff", icon: Users },
+        { label: "Reports", href: "/dashboard/reports", icon: BarChart3 },
+      ],
+    },
+  ],
+  STAFF: [
+    {
+      section: "Main",
+      items: [
+        { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+        { label: "Vehicles", href: "/dashboard/vehicles", icon: Car },
+        { label: "Inquiries", href: "/dashboard/inquiries", icon: MessageSquare },
+      ],
+    },
+    {
+      section: "Operations",
+      items: [
+        { label: "Sell Requests", href: "/dashboard/sell-requests", icon: HandCoins },
+        { label: "Orders", href: "/dashboard/orders", icon: PackageCheck },
+        { label: "Inspections", href: "/dashboard/inspections", icon: ClipboardCheck },
+      ],
+    },
+  ],
+  BUYER: [
+    {
+      section: "My Account",
+      items: [
+        { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+        { label: "My Orders", href: "/dashboard/orders", icon: PackageCheck },
+      ],
+    },
+  ],
+  SELLER: [
+    {
+      section: "My Account",
+      items: [
+        { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+        { label: "Sell Requests", href: "/dashboard/sell-requests", icon: HandCoins },
+      ],
+    },
+  ],
+};
 
-const sidebarSections = [
-  {
-    section: "Main",
-    items: [
-      { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-      { label: "Vehicles", href: "/dashboard/vehicles", icon: Car },
-      { label: "Inquiries", href: "/dashboard/inquiries", icon: MessageSquare },
-    ],
-  },
-  {
-    section: "Requests",
-    items: [
-      { label: "Sell Requests", href: "/dashboard/sell-requests", icon: HandCoins },
-      { label: "Inspections", href: "/dashboard/inspections", icon: ClipboardCheck },
-    ],
-  },
-  {
-    section: "Management",
-    items: [
-      { label: "Branches", href: "/dashboard/branches", icon: Building2 },
-      { label: "Staff", href: "/dashboard/staff", icon: Users },
-      { label: "Reports", href: "/dashboard/reports", icon: BarChart3 },
-    ],
-  },
-];
+interface DashboardSidebarProps {
+  role: AppRole;
+  fullName: string | null;
+}
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({ role, fullName }: DashboardSidebarProps) {
+  const sidebarSections = sidebarSectionsByRole[role];
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -88,6 +134,16 @@ export default function DashboardSidebar() {
 
           {/* Nav */}
           <nav className='flex-1 overflow-y-auto px-3 py-4 space-y-6'>
+            <div className='px-3 pb-3 border-b border-[var(--border-default)]'>
+              {!collapsed && (
+                <>
+                  <p className='text-xs uppercase tracking-wider text-text-brand-muted'>Signed in as</p>
+                  <p className='text-sm font-semibold text-text-brand-primary mt-1'>{fullName || "User"}</p>
+                  <p className='text-xs text-text-brand-muted mt-1'>{role}</p>
+                </>
+              )}
+            </div>
+
             {sidebarSections.map((section) => (
               <div key={section.section}>
                 {!collapsed && (
@@ -137,10 +193,12 @@ export default function DashboardSidebar() {
             </button>
 
             {/* Logout */}
-            <button className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-red-500 hover:bg-red-50 transition-colors ${collapsed ? "justify-center" : ""}`}>
-              <LogOut size={18} />
-              {!collapsed && <span>Logout</span>}
-            </button>
+            <form action='/auth/logout' method='post'>
+              <button className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-red-500 hover:bg-red-50 transition-colors ${collapsed ? "justify-center" : ""}`}>
+                <LogOut size={18} />
+                {!collapsed && <span>Logout</span>}
+              </button>
+            </form>
           </div>
         </div>
       </aside>
