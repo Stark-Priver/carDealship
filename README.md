@@ -35,7 +35,7 @@ NEXT_PUBLIC_SITE_URL=https://bingwamagari.co.tz
 2. Open SQL Editor.
 3. Run the script in `supabase/schema.sql`.
 4. Run `supabase/seed.sql` for starter branches, vehicles, and sample staff role mapping by email.
-4. Confirm buckets exist:
+5. Confirm buckets exist:
 - `vehicle-images`
 - `sell-request-images`
 
