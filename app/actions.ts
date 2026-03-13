@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { requireAnyRole, requireAppSession } from "@lib/auth";
 import { createClient } from "@lib/supabase/server";
+import { AppRole } from "@lib/supabase/database.types";
 
 export async function submitInquiry(formData: FormData) {
   const supabase = createClient();
@@ -224,4 +225,65 @@ export async function updateOrderStatus(formData: FormData) {
   const status = String(formData.get("status") || "PLACED");
   await supabase.from("orders").update({ status: status as any }).eq("id", id);
   revalidatePath("/dashboard/orders");
+}
+
+export async function createBranch(formData: FormData) {
+  await requireAnyRole(["ADMIN", "STAFF"]);
+  const supabase = createClient();
+
+  const payload = {
+    name: String(formData.get("name") || "").trim(),
+    city: String(formData.get("city") || "").trim(),
+    address: String(formData.get("address") || "").trim(),
+    phone: String(formData.get("phone") || "").trim(),
+    upcoming: formData.get("upcoming") === "on",
+  };
+
+  await supabase.from("branches").insert(payload);
+  revalidatePath("/dashboard/branches");
+}
+
+export async function updateBranch(formData: FormData) {
+  await requireAnyRole(["ADMIN", "STAFF"]);
+  const supabase = createClient();
+
+  const id = String(formData.get("id") || "");
+  if (!id) return;
+
+  await supabase
+    .from("branches")
+    .update({
+      name: String(formData.get("name") || "").trim(),
+      city: String(formData.get("city") || "").trim(),
+      address: String(formData.get("address") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      upcoming: formData.get("upcoming") === "on",
+    })
+    .eq("id", id);
+
+  revalidatePath("/dashboard/branches");
+}
+
+export async function updateStaffProfile(formData: FormData) {
+  await requireAnyRole(["ADMIN"]);
+  const supabase = createClient();
+
+  const id = String(formData.get("id") || "");
+  if (!id) return;
+
+  const rawRole = String(formData.get("role") || "STAFF") as AppRole;
+  const role: AppRole = rawRole === "ADMIN" || rawRole === "STAFF" ? rawRole : "STAFF";
+  const branchId = String(formData.get("branchId") || "").trim() || null;
+  const isActive = formData.get("isActive") === "on";
+
+  await supabase
+    .from("profiles")
+    .update({
+      role,
+      branch_id: branchId,
+      is_active: isActive,
+    })
+    .eq("id", id);
+
+  revalidatePath("/dashboard/staff");
 }
