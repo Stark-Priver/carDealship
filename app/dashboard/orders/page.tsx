@@ -3,6 +3,21 @@ import { requireAppSession } from "@lib/auth";
 import { createClient } from "@lib/supabase/server";
 import { formatTZS } from "@utils";
 
+type OrderListItem = {
+  id: string;
+  buyer_id: string;
+  vehicle_id: string;
+  status: "PLACED" | "CONFIRMED" | "CANCELLED";
+  total_amount: number;
+  created_at: string;
+  vehicles: {
+    make: string;
+    model: string;
+    year: number;
+    stock_number: string;
+  } | null;
+};
+
 interface OrdersPageProps {
   searchParams: { success?: string };
 }
@@ -20,7 +35,8 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
     query = query.eq("buyer_id", session.userId);
   }
 
-  const { data: orders } = await query;
+  const { data } = await query;
+  const orders = (data ?? []) as OrderListItem[];
 
   return (
     <div>
@@ -42,7 +58,7 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
             </tr>
           </thead>
           <tbody>
-            {(orders ?? []).map((order) => (
+            {orders.map((order) => (
               <tr key={order.id}>
                 <td>{order.vehicles ? `${order.vehicles.year} ${order.vehicles.make} ${order.vehicles.model}` : "-"}</td>
                 <td className='font-mono text-xs'>{order.vehicles?.stock_number || "-"}</td>
