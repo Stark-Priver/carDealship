@@ -1,6 +1,14 @@
 import { requireAnyRole } from "@lib/auth";
 import { createClient } from "@lib/supabase/server";
 
+type StaffItem = {
+  id: string;
+  full_name: string | null;
+  role: "ADMIN" | "STAFF";
+  is_active: boolean;
+  branches: { name: string } | null;
+};
+
 export default async function StaffPage() {
   await requireAnyRole(["ADMIN"]);
   const supabase = createClient();
@@ -10,6 +18,8 @@ export default async function StaffPage() {
     .select("id, full_name, role, is_active, branches(name)")
     .in("role", ["ADMIN", "STAFF"])
     .order("created_at", { ascending: false });
+
+  const staffList = (staff ?? []) as StaffItem[];
 
   return (
     <div>
@@ -25,7 +35,7 @@ export default async function StaffPage() {
             </tr>
           </thead>
           <tbody>
-            {(staff ?? []).map((person) => (
+            {staffList.map((person) => (
               <tr key={person.id}>
                 <td>{person.full_name || person.id}</td>
                 <td>{person.role}</td>
